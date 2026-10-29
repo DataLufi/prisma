@@ -33,23 +33,27 @@ Em 2023, quando os dados do projeto começam, essas decisões já estavam embuti
 
 ## A Pergunta Central
 
-> **Onde está destruindo margem sem que ninguém perceba?**
+> **A ÍconeLab está crescendo de forma saudável — ou comprando receita com margem?**
 
 ---
 
 ## Os 7 Profit Leaks
 
-Injetados de forma controlada e rastreável no dataset sintético. Cada leak tem um mecanismo documentado e uma query de diagnóstico dedicada.
+Um Profit Leak (vazamento de lucro) é qualquer perda invisível ou gradual de dinheiro que ocorre dentro de uma empresa, fazendo com que a receita gerada não chegue ao resultado líquido final. De acordo com estudos de mercado, cerca de 90% das pequenas e médias empresas sofrem com esse problema, perdendo em média 9% do faturamento anual de forma silenciosa.
 
-| Leak | Nome | Mecanismo |
-|---|---|---|
-| 1 | Desconto Marketplace | Multiplicador cresce 1.00 → 1.45 (2023→2025) |
-| 2 | Frete Norte/Nordeste | Base Norte R$72 vs Sudeste R$18 · crescimento +38% |
-| 3 | Devolução Tech | Taxa base 12% em Tech & Lifestyle · Marketplace amplifica ×1.35 |
-| 4 | CAC crescente | Eficiência de campanha cai enquanto investimento cresce |
-| 5 | Estoque parado | Reposição excessiva em Gourmet & Experience · capital imobilizado |
-| 6 | SLA Sazonal | Nov/Dez prazo base ×1.6 · piora YoY |
-| 7 | Mix baixa margem | Tech & Lifestyle cresce: 18% → 22% → 26% do mix |
+Neste projeto foram injetados de forma controlada e rastreável no dataset sintético. Cada leak tem um mecanismo documentado e uma query de diagnóstico dedicada.
+
+| Leak | Nome | Mecanismo | Impacto encontrado |
+|---|---|---|---|
+| 1 | Desconto Marketplace | Multiplicador cresce 1.00 → 1.45 (2023→2025) | +R$ 5,2 Mi |
+| 2 | Frete Norte/Nordeste | Base Norte R$72 vs Sudeste R$18 · crescimento +38% | -R$ 1,8 Mi |
+| 3 | Devolução Tech | Taxa base 12% em Tech & Lifestyle · Marketplace amplifica ×1.35 | -R$ 3,1 Mi |
+| 4 | CAC crescente | Eficiência de campanha cai enquanto investimento cresce | +R$ 4,1 Mi |
+| 5 | Estoque parado | Reposição excessiva · capital imobilizado · giro baixo | -R$ 2,9 Mi |
+| 6 | Mix baixa margem | Tech & Lifestyle cresce: 18% → 22% → 26% do mix | +R$ 2,3 Mi |
+| 7 | Retenção | Cohort queda após M2 · abandono silencioso | +R$ 3,7 Mi |
+
+**Impacto potencial total: R$ 23,1 Mi · Quick wins (≤ 45 dias): R$ 8,1 Mi**
 
 ---
 
@@ -70,7 +74,7 @@ Injetados de forma controlada e rastreável no dataset sintético. Cada leak tem
 
 2024–2025   A investigação
             7 profit leaks identificados, quantificados e mapeados
-            Plano de ação com impacto financeiro estimado
+            Plano de ação com R$ 23,1 Mi de impacto potencial
 ```
 
 ---
@@ -97,20 +101,39 @@ Cada query isola um leak, quantifica o impacto financeiro e produz o insumo para
 ### 📈 Frente 3 — Power BI: Dashboard Executivo
 > *Onde o diagnóstico vira decisão.*
 
-5 páginas integradas em narrativa visual coerente:
+5 páginas integradas em narrativa visual coerente. Visualizações avançadas via Deneb/Vega-Lite — heatmap de cohort, bubble chart impacto × esforço e funil de recompra.
 
-| Página | Foco |
-|---|---|
-| 1 — Executive Summary | Visão geral · KPIs · saúde da operação |
-| 2 — Profit Leak | Waterfall de margem · drill-through por canal |
-| 3 — Clientes | Cohort de retenção · LTV vs CAC · segmentação |
-| 4 — Operação | Frete · SLA · devoluções · estoque |
-| 5 — Plano de Ação | 7 recomendações com impacto financeiro estimado |
+| Página | Foco | Destaques |
+|---|---|---|
+| 1 — Executive Summary | Visão geral · KPIs · saúde da operação | Receita vs Margem 2023–2025 — as linhas que se cruzam |
+| 2 — Profit Leak | Waterfall de margem · drill-through por canal | Decomposição: Receita 294M → Margem Final 33M |
+| 3 — Clientes | Cohort de retenção · LTV vs CAC · segmentação | CAC +41% · LTV -76% em 2 anos |
+| 4 — Operação | Frete · SLA · devoluções · estoque | 34,2% dos pedidos em SLA crítico |
+| 5 — Plano de Ação | 7 recomendações com impacto financeiro estimado | R$ 23,1 Mi · Quick wins em 45 dias |
 
-### 🗣️ Frente 4 — Reputação & Voz do Mercado
+[![Executive Summary](assets/p1_executive_summary.png)](https://github.com/DataLufi/prisma/blob/main/assets/p1_executive_summary.png)
+[![Profit Leak](assets/p2_profit_leak.png)](https://github.com/DataLufi/prisma/blob/main/assets/p2_profit_leak.png)
+[![Operação](assets/p4_operacao.png)](https://github.com/DataLufi/prisma/tree/main/assets#:~:text=26%20minutes%20ago-,p4_opera%C3%A7%C3%A3o.png,-upload%20imagens)
+![Clientes](assets/p3_clientes.png)
+![Plano de Ação](assets/p5_plano_acao.png)
+
+
+### 🗣️ Frente 4 — Reputação & Voz do Mercado *(melhoria futura)*
 > *O que os clientes dizem publicamente — e o que isso revela além do financeiro.*
 
-Reviews sintéticos + benchmark setorial real. NLP com BERTimbau para categorização automática de motivos. Cruzamento de sentimento público com queda de margem — os dois sinais chegaram juntos.
+Escopo planejado: reviews sintéticos + benchmark setorial. NLP com BERTimbau para categorização automática de motivos. Cruzamento de sentimento público com queda de margem.
+
+Não implementado nesta versão. Identificado como extensão natural do diagnóstico financeiro — os dois sinais (financeiro e reputacional) chegam juntos em operações sob pressão.
+
+---
+
+## Resultado do Diagnóstico
+
+A ÍconeLab cresceu receita entre 2023 e 2025, mas comprou esse crescimento com margem: o CAC subiu 41%, o LTV caiu 76% e a taxa de devolução no Marketplace pressiona o resultado operacional.
+
+Sete pontos críticos foram identificados — com impacto potencial combinado de **R$ 23,1 Mi** — sendo dois deles endereçáveis em menos de 45 dias sem investimento adicional.
+
+**A prioridade imediata é conter o sangramento em desconto e estoque antes de escalar qualquer canal.**
 
 ---
 
@@ -119,7 +142,7 @@ Reviews sintéticos + benchmark setorial real. NLP com BERTimbau para categoriza
 ```
 [GERAÇÃO DO DATASET]
 Python (NumPy vetorizado, SEED=42)
-gerar_dimensoes.py → gerar_fvendas.py → gerar_complementares.py
+01_Concepção_e_Arquitetura.ipynb
 9 CSVs · ~228.800 linhas · 7 profit leaks controlados
 
         ↓
@@ -137,14 +160,8 @@ PostgreSQL
         ↓
 
 [DASHBOARD]
-Power BI Desktop
-Modelo estrela · DAX · 5 páginas · drill-through
-
-        ↓
-
-[REPUTAÇÃO]
-Python + BERTimbau → NLP de reviews
-Cruzamento sentimento × margem
+Power BI Desktop — prisma_dashboard.pbix
+Modelo estrela · DAX · Deneb/Vega-Lite · 5 páginas
 ```
 
 ---
@@ -152,10 +169,11 @@ Cruzamento sentimento × margem
 ## Stack
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat&logo=postgresql&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat&logo=postgresql&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black)
+
 
 ---
 
@@ -163,12 +181,12 @@ Cruzamento sentimento × margem
 
 | Milestone | Status |
 |---|---|
-| 0 — Concepção e Arquitetura | ✅ Concluído |
-| 1 — SQL: Fundação | 🔄 Em andamento |
-| 2 — SQL: Análise de Negócio | ⏳ Aguardando M1 |
-| 3 — Power BI: Modelo + Pág. 1-2 | ⏳ Aguardando M2 |
-| 4 — Power BI: Pág. 3-5 + Entrega | ⏳ Aguardando M3 |
-| 5 — Reputação & Voz do Mercado | ⏳ Aguardando M4 |
+| M0 — Concepção e Arquitetura | ✅ Concluído |
+| M1 — SQL: Fundação | ✅ Concluído |
+| M2 — SQL: Análise de Negócio | ✅ Concluído |
+| M3 — Power BI: Modelo + Pág. 1-2 | ✅ Concluído |
+| M4 — Power BI: Pág. 3-5 + Entrega | ✅ Concluído |
+| M5 — Reputação & Voz do Mercado | 🔜 Melhoria futura |
 
 ---
 
@@ -180,9 +198,8 @@ Reprodutível com `SEED=42`. Não requer download externo.
 ```bash
 pip install -r requirements.txt
 
-python gerar_dimensoes.py
-python gerar_fvendas.py
-python gerar_complementares.py
+# Execute o notebook completo:
+jupyter notebook "01___Concepção_e_Arquitetura.ipynb"
 ```
 
 > ⏱️ Tempo estimado de geração: ~3 minutos
